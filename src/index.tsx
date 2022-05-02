@@ -9,6 +9,8 @@ import { Repositories } from './pages/Repositories';
 import { Contacts } from './pages/Contacts';
 import { Explore } from './pages/Explore';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const queryClient = new QueryClient();
 const theme = createTheme({
@@ -27,14 +29,16 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/"   element={<App />} />
-            <Route path="/contacts"   element={<Contacts />} />
-            <Route path="/explore"   element={<Explore />} />
-            <Route path="/repos"   element={<Repositories />} />
-          </Routes>
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/"   element={<App />} />
+              <Route path="/contacts"   element={<Contacts />} />
+              <Route path="/explore"   element={<Explore />} />
+              <Route path="/repos"   element={<Repositories />} />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>

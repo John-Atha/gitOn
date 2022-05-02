@@ -1,9 +1,11 @@
-import React from 'react';
-import { ReactElement } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
 import { GitHub, Home, Folder, PersonAddAlt, Explore } from '@mui/icons-material';
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, List, ListItem, ListItemIcon, ListItemText, Button, useTheme } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import { setDialog } from '../../redux/slices/dialogSlice';
+import { LoginDialog } from '../login/LoginDialog';
 
 const drawerWidth = 240;
 
@@ -52,6 +54,14 @@ export default function MySidebar({ children }: MySidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const [showingLogin, setShowingLogin] = useState(false);
+
+  const renderLogin = () => {
+    if (showingLogin) {
+      return <LoginDialog onClose={()=>setShowingLogin(false)} />
+    }
+  }
 
   const navs = [
     {
@@ -115,7 +125,7 @@ export default function MySidebar({ children }: MySidebarProps) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Welcome
           </Typography>
-          <Button startIcon={<GitHub />} color="inherit">Login</Button>
+          <Button startIcon={<GitHub />} onClick={() => setShowingLogin(true)} color="inherit">Login</Button>
         </Toolbar>
       </MyAppBar>
       <Drawer
@@ -144,6 +154,7 @@ export default function MySidebar({ children }: MySidebarProps) {
       <Main>
         <DrawerHeader />
         { children }
+        { renderLogin() }
       </Main>
     </Box>
   );
