@@ -1,15 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { App } from './pages/App';
 import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Repositories } from './pages/Repositories';
+import { Contacts } from './pages/Contacts';
+import { Explore } from './pages/Explore';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const queryClient = new QueryClient();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main:  "#13a155",
+      light: "#f0fcf3",
+    }
+  }
+})
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/"   element={<App />} />
+            <Route path="/contacts"   element={<Contacts />} />
+            <Route path="/explore"   element={<Explore />} />
+            <Route path="/repos"   element={<Repositories />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
