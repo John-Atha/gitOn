@@ -109,6 +109,7 @@ export default function MySidebar({ children }: MySidebarProps) {
         </ListItem>
     )
   }
+  
   const renderNavs = () => {
     return (
         navs.map(({ text, slug, icon}, index) => (

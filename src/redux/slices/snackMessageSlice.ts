@@ -4,7 +4,7 @@ import { RootState } from "../store";
 interface SnackProps {
     text: string | null,
     severity: "info" | "success" | "error" | "warning",
-    duration: number,
+    duration?: number,
 }
 
 const initialState: SnackProps = {

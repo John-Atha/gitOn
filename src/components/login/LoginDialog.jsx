@@ -5,7 +5,7 @@ import { Dialog } from "@mui/material";
 export const LoginDialog = ({ onClose }) => {
     return (
         <Dialog maxWidth="sm" fullWidth open onClose={onClose}>
-            <LoginForm />
+            <LoginForm onClose={onClose} />
         </Dialog>
     )
 }

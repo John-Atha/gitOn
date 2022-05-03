@@ -3,12 +3,17 @@ import { GitHub } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography, useTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { setSnackMessage } from "../../redux/slices/snackMessageSlice";
+import { useQuery } from 'react-query';
+import { queriesKeys } from '../../api/queriesKeys';
+import { checkLoggedCall } from '../../api/auth';
 
-export const LoginForm = () => {
+interface LoginFormProps {
+    onClose: () => void,
+}
+export const LoginForm = ({ onClose }: LoginFormProps) => {
     const theme = useTheme();
     const dispatch = useAppDispatch();
     const [token, setToken] = useState("");
-
 
     const login = () => {
         console.log(token);
@@ -18,15 +23,22 @@ export const LoginForm = () => {
                 severity: "warning",
             }))
         }
-
+        else {
+            localStorage.setItem("token", token);
+            dispatch(setSnackMessage({
+                text: "Logged in successfully",
+                severity: "success",
+            }));
+            onClose();
+        }
     }
 
     return (
         <Grid container rowSpacing={3} justifyContent="center" padding={3}>
             <Grid item xs={12}>
-                <Grid container alignItem="center" justifyContent="center">
-                    <GitHub sx={{ paddingTop: 0.5, fontSize: 30 }} />
-                    <Typography variant="h6" align="center">
+                <Grid container alignItems="center" justifyContent="center">
+                    <GitHub sx={{ fontSize: 25 }} />
+                    <Typography variant="h6" align="center" sx={{ paddingLeft: 1 }}>
                         Login
                     </Typography>
                 </Grid>
