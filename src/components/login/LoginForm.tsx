@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { GitHub } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography, useTheme } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useAppDispatch } from '../../redux/hooks'
 import { setSnackMessage } from "../../redux/slices/snackMessageSlice";
-import { useQuery } from 'react-query';
-import { queriesKeys } from '../../api/queriesKeys';
-import { checkLoggedCall } from '../../api/auth';
 
 interface LoginFormProps {
     onClose: () => void,
