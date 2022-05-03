@@ -2,7 +2,7 @@ import React, { useState, ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
 import { GitHub, Home, Folder, PersonAddAlt, Explore } from '@mui/icons-material';
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, List, ListItem, ListItemIcon, ListItemText, Button, useTheme } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { LoginDialog } from '../login/LoginDialog';
 
 const drawerWidth = 240;
@@ -52,6 +52,7 @@ export default function MySidebar({ children }: MySidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [showingLogin, setShowingLogin] = useState(false);
 
   const renderLogin = () => {
@@ -79,7 +80,13 @@ export default function MySidebar({ children }: MySidebarProps) {
   ]
 
   const goToPage = (slug: string) => {
-    navigate(`/${slug}`);
+    const key = searchParams.get("key");
+    if (key) {
+      navigate(`/${slug}?key=${key}`);
+    }
+    else {
+      navigate(`/${slug}`);
+    }
   }
 
   interface NavProps {
@@ -139,7 +146,7 @@ export default function MySidebar({ children }: MySidebarProps) {
         open
       >
         <DrawerHeader>
-          <Button fullWidth onClick={()=>navigate("/")} startIcon={<Home />} size="large" sx={{ textTransform: "none", fontSize: 20, justifyContent: "flex-start" }}>
+          <Button fullWidth onClick={()=>goToPage("")} startIcon={<Home />} size="large" sx={{ textTransform: "none", fontSize: 20, justifyContent: "flex-start" }}>
               GitOn
           </Button>
         </DrawerHeader>

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Repos } from '../components/repos/Repos';
+import { Contacts } from '../components/contacts/Contacts';
 import { SearchPage } from '../components/search/SearchPage';
 import { PageSkeleton } from './PageSkeleton';
 
-export const Repositories = () => {
+export const ContactsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [total, setTotal] = useState(0);
 
   return (
     <PageSkeleton
@@ -14,7 +13,7 @@ export const Repositories = () => {
         <SearchPage
           placeholder={"Search for a user..."}
           resultsComponent={
-            <Repos
+            <Contacts
               value={searchParams.get("key") || ""}
             />
           }

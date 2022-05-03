@@ -1,6 +1,6 @@
 import { Search } from '@mui/icons-material';
 import { Grid, IconButton, InputBase, Paper } from '@mui/material';
-import React, { ReactElement, SyntheticEvent, useState } from 'react'
+import React, { ReactElement, SyntheticEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 
 interface SearchBarProps {
@@ -13,11 +13,15 @@ export const SearchBar = ({ initValue, placeholder }: SearchBarProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
     
     const submit = (event: SyntheticEvent) => {
-        console.log(event);
+        console.log("submitting")
         event.preventDefault();
-        console.log(value);
-        setSearchParams({ "key": value })
+        setSearchParams({ "key": value });
     }
+
+    useEffect(() => {
+        setValue(searchParams.get("key"));
+    }, [searchParams])
+    
     return (
         <Paper component="form" onSubmit={submit} >
             <Grid container justifyContent={"space-between"} alignItems="center">

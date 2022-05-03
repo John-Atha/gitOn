@@ -1,44 +1,53 @@
-import { Alert, Grid } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { queriesKeys } from '../../api/queriesKeys'
 import { getRepos } from '../../api/repos'
-import Spinner from '../general/Spinner'
-import { OneRepo, OneRepoProps } from './OneRepo'
+import { OneRepo } from './OneRepo'
+import { pagiStep } from '../../api/config';
+import { Results } from '../general/Results';
 
-interface ReposProps {
-    value?: string | null,
+export interface UsernameProps {
+    value?: string,
 }
 
-export const Repos = ({ value: username }: ReposProps) => {
-    console.log({ username });
+export const Repos = ({ value: username }: UsernameProps) => {
+    const [page, setPage] = useState(1);
+    const [all, setAll] = useState<any>([]);
+    const [noMore, setNoMore] = useState(false);
 
     const { data, isLoading } = useQuery(
-        [queriesKeys['getRepos'], username],
-        () => getRepos({ username: username || "" }), {
+        [queriesKeys['getRepos'], page],
+        () => getRepos({ username, page }), {
             enabled: Boolean(username),
         }
     )
 
-    if (isLoading) {
-        return (
-            <Spinner />
-        )
-    }
-    if (!data?.length) {
-        return (
-            <Alert severity="info">
-                No repositories found
-            </Alert>
-        )
-    }
+    useEffect(() => {
+        setPage(1);
+    }, [username])
+
+    useEffect(() => {
+        if (isLoading) return;
+        let temp = [];
+        if (data?.length) {
+            const existingIds = new Set(all.map(({ id }: any) => id));
+            const new_data = data.filter(({ id }: any) => !existingIds.has(id));
+            temp = all.concat(new_data);
+        }
+        setAll(temp.filter(({ owner: { login }}: any) => login.toLowerCase()===username?.toLowerCase()))
+        setNoMore(data?.length<pagiStep);
+    }, [data])
+
     return (
-        <Grid container spacing={2}>
-            {data.map((repo: OneRepoProps) => (
-                <Grid item key={repo?.id}>
-                    <OneRepo {...repo} />
-                </Grid>
-            ))}
-        </Grid>
+        <Results
+            data={all}
+            isLoading={isLoading}
+            noMore={noMore}
+            onNextPage={()=>setPage(page+1)}
+            keyword="repositories"
+            oneComponent={
+                <OneRepo />
+            }
+        />
     )
 }

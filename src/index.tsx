@@ -6,13 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Repositories } from './pages/Repositories';
-import { Contacts } from './pages/Contacts';
+import { ContactsPage } from './pages/ContactsPage';
 import { Explore } from './pages/Explore';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient(({
+  defaultOptions: {
+    queries: {
+      notifyOnChangeProps: 'tracked',
+    },
+  },
+}));
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -33,7 +40,7 @@ root.render(
           <BrowserRouter>
             <Routes>
               <Route path="/"   element={<App />} />
-              <Route path="/contacts"   element={<Contacts />} />
+              <Route path="/contacts"   element={<ContactsPage />} />
               <Route path="/explore"   element={<Explore />} />
               <Route path="/repos"   element={<Repositories />} />
             </Routes>

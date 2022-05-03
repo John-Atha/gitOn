@@ -1,4 +1,5 @@
 import axios from "axios";
+import { pagiStep } from "./config";
 
 export const buildAuthHeader = () => {
     const token = localStorage.getItem("token");
@@ -17,10 +18,15 @@ interface GetProps {
 export const getRequest = async ({ requestUrl, headers, params }: GetProps) => {
     return axios.get(
         requestUrl,
-        { ...(headers && { headers }),
-        ...(params && { params }) }
+        {
+            ...(headers && { headers }),
+            params: {
+                ...params,
+                per_page: pagiStep,
+            },
+        }
     ).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     }).catch(err => {
         console.log(err);

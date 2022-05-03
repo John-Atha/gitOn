@@ -1,8 +1,7 @@
 import { Grid } from '@mui/material';
-import React, { cloneElement, ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PageSkeleton } from '../../pages/PageSkeleton';
-import { UserCard } from '../users/UserCard';
+import { UserCardWithoutData } from '../users/UserCardWithoutData';
 import { SearchBar } from './SearchBar';
 
 interface SearchPageProps {
@@ -23,7 +22,7 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
         />
       </Grid>
       <Grid item xs={12}>
-        <UserCard username={searchParams.get("key")} />
+        <UserCardWithoutData username={searchParams.get("key")} />
       </Grid>
       <Grid item xs={12}>
         {resultsComponent}
