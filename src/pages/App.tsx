@@ -9,6 +9,7 @@ import { PublicRepos } from "../components/dashboard/PublicRepos";
 import { Followers } from '../components/dashboard/Followers';
 import { Follows } from '../components/dashboard/Follows';
 import { Email } from '../components/dashboard/Email';
+import { StarredRepos } from '../components/repos/StarredRepos';
 
 export const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,10 +31,17 @@ export const App = () => {
           />
         </Grid>
         <Grid item width={400} height={250}>
-          <TopLanguages
-            value={searchParams.get("key") || ""}
-            width={350}
-          />
+          <Grid container rowSpacing={1}>
+            <Grid item xs={12}>
+              <TopLanguages
+                value={searchParams.get("key") || ""}
+                width={350}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <StarredRepos />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )

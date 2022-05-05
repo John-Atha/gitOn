@@ -34,7 +34,6 @@ export const Email = () => {
     }
 
     if (name) {
-        console.log({ name })
         return (
             <SimpleCard
                 title={name}

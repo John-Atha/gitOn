@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
-import { GitHub, Home, Folder, PersonAddAlt, Explore } from '@mui/icons-material';
+import { GitHub, Home, Folder, PersonAddAlt, Explore, Dashboard } from '@mui/icons-material';
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, List, ListItem, ListItemIcon, ListItemText, Button, useTheme } from '@mui/material';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { LoginDialog } from '../login/LoginDialog';
@@ -63,6 +63,11 @@ export default function MySidebar({ children }: MySidebarProps) {
 
   const navs = [
     {
+      slug: "",
+      text: "Dashboard",
+      icon: <Dashboard />,
+    },
+    {
         slug: "repos",
         text: "Repositories",
         icon: <Folder />,
@@ -100,15 +105,20 @@ export default function MySidebar({ children }: MySidebarProps) {
     const path = location.pathname;
     const selected = path.slice(1)===slug;
     return (
-        <ListItem button key={index} onClick={()=>goToPage(slug)} sx={{
+        <ListItem
+          button
+          key={index}
+          onClick={()=>goToPage(slug)}
+          sx={{
             borderRadius: 2,
-            bgcolor: (selected ? theme?.palette?.primary?.light : "inherit"),
-            color: (selected ? theme?.palette?.primary?.main : "auto"),
-            }}>
-            <ListItemIcon>
-                { icon }
-            </ListItemIcon>
-            <ListItemText primary={text} />
+            bgcolor: (selected ? theme?.palette?.success?.light : "inherit"),
+            color: ("auto"),
+          }}
+        >
+          <ListItemIcon>
+              { icon }
+          </ListItemIcon>
+          <ListItemText primary={text} />
         </ListItem>
     )
   }
@@ -155,7 +165,7 @@ export default function MySidebar({ children }: MySidebarProps) {
           { renderNavs() }
         </List>
       </Drawer>
-      <Main>
+      <Main sx={{ paddingBottom: "24px !important" }}>
         <DrawerHeader />
         { children }
         { renderLogin() }

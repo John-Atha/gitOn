@@ -28,3 +28,15 @@ export const getFollows = async ({ username, page }: getUserProps) => {
     const params = { page };
     return getRequest({ requestUrl, headers, params });
 }
+
+export const getStarredRepos = async ({ username }: getUserProps) => {
+    const requestUrl = `/users/${username}/starred`;
+    const headers = buildAuthHeader();
+    const params = {
+        per_page: 10,
+        page: 1,
+        sort: "stars",
+        order: "desc",
+    };
+    return getRequest({ requestUrl, headers, params });
+}

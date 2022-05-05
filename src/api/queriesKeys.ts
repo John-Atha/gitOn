@@ -9,4 +9,5 @@ export const queriesKeys = {
     'getLastCommit': 'users/commits/get/last',
     'getMonthCommits': 'users/commits/get/month',
     'getLatestRepos': 'users/repos/get/latest',
+    'getStarredRepos': `users/repos/get/starred`,
 }
