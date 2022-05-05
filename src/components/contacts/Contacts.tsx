@@ -5,7 +5,7 @@ import { queriesKeys } from '../../api/queriesKeys'
 import { getFollowers, getFollows } from '../../api/user'
 import Spinner from '../general/Spinner'
 import { Grid, Typography } from '@mui/material'
-import { BarChart } from "../charts/BarChart";
+import { GeneralChart } from "../charts/GeneralChart";
 import { UserCard } from '../users/UserCard'
 import { Results } from '../general/Results'
 import { pagiStep } from '../../api/config'
@@ -46,10 +46,10 @@ export const Contacts = ({ value: username }: UsernameProps) => {
         }
         return (
             <Grid container justifyContent="center">
-                <BarChart
+                <GeneralChart
                     id="contacts"
                     categories={["Followers", "Follows"]}
-                    series={[{ name: "total", data: [totalFollowers || 0, totalFollows || 0]}]}
+                    values={[totalFollowers || 0, totalFollows || 0]}
                     width={500}
                 />
             </Grid>

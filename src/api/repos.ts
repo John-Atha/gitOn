@@ -26,3 +26,14 @@ export const getRepoParticipation = async ({ username, repoName }: getRepoPartic
     const headers = buildAuthHeader();
     return getRequest({ requestUrl, headers });
 }
+
+export const get100LatestRepos = async ({ username }: getReposProps) => {
+    const requestUrl = `/users/${username}/repos`;
+    const params = {
+        per_page: 100,
+        sort: "updated",
+        order: "desc"
+    };
+    const headers = buildAuthHeader();
+    return getRequest({ requestUrl, headers, params });
+}

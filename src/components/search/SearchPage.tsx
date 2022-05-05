@@ -37,7 +37,7 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
     )
   }
   return (
-    <Grid container spacing={3} justifyContent="center">
+    <Grid container rowSpacing={3} justifyContent="center">
       <Grid item xs={12}>
         <SearchBar
           initValue=""
