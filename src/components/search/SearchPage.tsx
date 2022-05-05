@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import React, { ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { UserCardWithoutData } from '../users/UserCardWithoutData';
@@ -13,20 +13,38 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const renderResults = () => {
+    if (searchParams.get("key")) {
+      return (
+        <>
+          <Grid item xs={12}>
+            <UserCardWithoutData username={searchParams.get("key")} />
+          </Grid>
+          <Grid item xs={12}>
+            {resultsComponent}
+          </Grid>
+        </>
+      )
+    }
+    return (
+      <Grid item width={600} maxWidth={"80vw"} marginTop={5}>
+        <Paper sx={{ alignItems: "center", paddingTop: 10, paddingBottom: 10 }}>
+          <Typography variant="h6" align="center">
+            Search for a user to see his/her info
+          </Typography>
+        </Paper>
+      </Grid>
+    )
+  }
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} justifyContent="center">
       <Grid item xs={12}>
         <SearchBar
           initValue=""
           placeholder={placeholder}
         />
       </Grid>
-      <Grid item xs={12}>
-        <UserCardWithoutData username={searchParams.get("key")} />
-      </Grid>
-      <Grid item xs={12}>
-        {resultsComponent}
-      </Grid>
+      { renderResults() }
     </Grid>
   )
 }

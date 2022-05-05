@@ -40,6 +40,7 @@ export const OneRepo = ({
         [queriesKeys['getRepoParticipation'], name],
         () => getRepoParticipation({ username: login, repoName: name }), {
             enabled: Boolean(login) && Boolean(name),
+            cacheTime: 10000,
         }
     )
 

@@ -16,9 +16,10 @@ export const Repos = ({ value: username }: UsernameProps) => {
     const [noMore, setNoMore] = useState(false);
 
     const { data, isLoading } = useQuery(
-        [queriesKeys['getRepos'], page],
+        [queriesKeys['getRepos'], page, username],
         () => getRepos({ username, page }), {
             enabled: Boolean(username),
+            cacheTime: 10000,
         }
     )
 

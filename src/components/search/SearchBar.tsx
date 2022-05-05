@@ -25,9 +25,9 @@ export const SearchBar = ({ initValue, placeholder }: SearchBarProps) => {
     return (
         <Paper component="form" onSubmit={submit} >
             <Grid container justifyContent={"space-between"} alignItems="center">
-                <Grid item>
+                <Grid item flex={1}>
                     <InputBase
-                        sx={{ ml: 1, flex: 1 }}
+                        sx={{ width: 1, ml: 1 }}
                         placeholder={placeholder || "Search..."}
                         inputProps={{ 'aria-label': placeholder||'search' }}
                         value={value}

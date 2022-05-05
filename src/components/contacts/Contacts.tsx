@@ -28,6 +28,7 @@ export const Contacts = ({ value: username }: UsernameProps) => {
         [queriesKeys['getFollowers'], username],
         () => getFollowers({ username: username || "" }), {
             enabled: Boolean(username),
+            cacheTime: 10000,
         }
     )
 
@@ -35,6 +36,7 @@ export const Contacts = ({ value: username }: UsernameProps) => {
         [queriesKeys['getFollows'], username],
         () => getFollows({ username: username || "" }), {
             enabled: Boolean(username),
+            cacheTime: 10000,
         }
     )
 

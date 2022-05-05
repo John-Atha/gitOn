@@ -32,6 +32,7 @@ export const UserCardWithoutData = ({ username }: OneUserProps) => {
         [queriesKeys['getUser'], username],
         () => getUser({ username: username || "" }), {
             enabled: Boolean(username),
+            cacheTime: 10000,
         }
     )
 
