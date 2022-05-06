@@ -5,12 +5,12 @@ import { NavLink } from 'react-router-dom'
 interface OwnerAvatarProps {
     username: string,
     avatar_url: string,
-    href: string,
+    href?: string,
     height?: number,
     width?: number,
     subheader?: string,
 }
-export const OwnerAvatar = ({ username, avatar_url, href, height=25, width=25, subheader }: OwnerAvatarProps) => {
+export const OwnerAvatar = ({ username, avatar_url, href="#", height=25, width=25, subheader }: OwnerAvatarProps) => {
     const theme = useTheme();
     return (
         <CardHeader

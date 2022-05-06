@@ -26,7 +26,6 @@ export const SimpleCard = ({ subtitle, title, href, icon, severity }: SimpleCard
         }
     }
 
-
     return (
         <Button
             sx={{ textTransform: "none" }}

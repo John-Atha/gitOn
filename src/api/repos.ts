@@ -51,3 +51,21 @@ export const getFamousRepos = async ({ limit=10 }: FamousProps) => {
     };
     return getRequest({ requestUrl, headers, params });
 }
+
+export interface GetLanguageRepoProps {
+    lang: string,
+    page: number,
+    per_page?: number
+}
+export const getReposByLang = async ({ lang, page, per_page=10 }: GetLanguageRepoProps) => {
+    const requestUrl = `https://api.github.com/search/repositories`
+    const headers = buildAuthHeader();
+    const params = {
+       q: `language:${lang}`,
+       per_page,
+       page,
+       sort: 'stars',
+       order: 'desc', 
+    };
+    return getRequest({ requestUrl, headers, params });
+}

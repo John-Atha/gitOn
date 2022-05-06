@@ -8,7 +8,7 @@ interface CarouselResultsProps {
     isLoading: boolean,
     title?: string,
     elevation?: number,
-    width?: number,
+    width?: number | string,
     maxWidth?: number | string,
     oneResultComponent: ReactElement,
 }

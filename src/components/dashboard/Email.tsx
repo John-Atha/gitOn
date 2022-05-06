@@ -3,7 +3,7 @@ import { useTheme } from '@mui/system'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectSearchUser } from '../../redux/slices/searchUser'
-import { SimpleCard } from './SimpleCard'
+import { SimpleCard } from '../general/SimpleCard'
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 export const Email = () => {

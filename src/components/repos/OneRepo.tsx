@@ -1,5 +1,5 @@
 import React from 'react'
-import { alpha, Button, Card, CardActions, CardContent, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { alpha, Button, Card, CardActions, CardContent, Grid, Paper, Rating, Typography, useTheme } from "@mui/material";
 import { stringSlice } from '../../helpers/stringSlice';
 import { useNavigate } from 'react-router-dom';
 import { OwnerAvatar } from './OwnerAvatar';
@@ -9,6 +9,7 @@ import { queriesKeys } from '../../api/queriesKeys';
 import { getRepoParticipation } from '../../api/repos';
 import { Sparklines, SparklinesLine  } from 'react-sparklines';
 import { arraySample } from '../../helpers/arraySample';
+import { Star } from '@mui/icons-material';
 
 export interface OneRepoProps {
     id?: number,
@@ -41,7 +42,8 @@ export const OneRepo = ({
     keywordsLim=-1,
     descriptionLim=100,
     height,
-    width
+    width,
+    stargazers_count,
 }: OneRepoProps) => {
     const navigate = useNavigate();
     const theme = useTheme();
@@ -62,7 +64,7 @@ export const OneRepo = ({
             <Sparklines
                 data={data.all}
                 limit={data.all?.length || 10}
-                svgWidth={100}
+                svgWidth={50}
                 svgHeight={20}
                 margin={2}
             >
@@ -70,6 +72,19 @@ export const OneRepo = ({
             </Sparklines>
         )
     }
+
+    const renderRating = () => {
+        return (
+            <Grid container alignItems="center">
+                <Typography variant='caption'>
+                    {stargazers_count}
+                </Typography>
+                <Star htmlColor={theme.palette.primary.main} />
+            </Grid>
+        )
+    }
+
+
     return (
         <Card
             component={Paper}
@@ -91,8 +106,16 @@ export const OneRepo = ({
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                { renderSparkLine() }
+                                <Grid container spacing={1}>
+                                    <Grid item>
+                                        { renderSparkLine() }
+                                    </Grid>
+                                    <Grid item>
+                                        { renderRating() }
+                                    </Grid>
+                                </Grid>
                             </Grid>
+
                         </Grid>
                         <OwnerAvatar username={login} avatar_url={avatar_url} href={owner_html_url} />
                         <Typography variant="body2" marginBottom={1}>

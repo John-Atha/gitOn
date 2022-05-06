@@ -12,4 +12,6 @@ export const queriesKeys = {
     'getStarredRepos': `users/repos/get/starred`,
     'getFamousUsers': `users/get/famous`,
     'getFamousRepos': `repos/get/famous`,
+    'getAllUsers': `users/get/all`,
+    'getLanguageRepos': `language/repos/get/all`,
 }

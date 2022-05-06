@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Typography } from '@mui/material'
+import { Grid, Paper, Typography } from '@mui/material'
 import { GeneralChart } from '../charts/GeneralChart'
 import Spinner from '../general/Spinner'
 
@@ -48,13 +48,25 @@ export const DiagramPaper = ({
         )
     }
     return (
-        <Paper sx={{ padding: 1, width: 1, height: 1 }}>
-            <Typography variant="body1" fontWeight={600} align="center">
-                {title}
-            </Typography>
-            {/* {JSON.stringify(keys)}
-            {JSON.stringify(values)} */}
-            { content }
+        <Paper
+            sx={{
+                padding: 1,
+                width: 1,
+                height: 1
+            }}
+            component={Grid}
+            container
+            alignItems="center"
+            justifyContent="center"
+        >
+            <Grid item xs={12}>
+                <Typography variant="body1" fontWeight={600} align="center">
+                    {title}
+                </Typography>
+                {/* {JSON.stringify(keys)}
+                {JSON.stringify(values)} */}
+                { content }
+            </Grid>
         </Paper>
     )
 }

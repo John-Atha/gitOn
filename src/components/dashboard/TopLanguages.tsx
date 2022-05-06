@@ -1,56 +1,45 @@
-import React, { useState, useEffect } from 'react'
-import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
-import { queriesKeys } from '../../api/queriesKeys';
-import { get100LatestRepos } from '../../api/repos';
-import { selectSearchUser } from '../../redux/slices/searchUser';
-import { UsernameProps } from '../repos/Repos'
+import React, { useEffect, useState } from 'react'
+import { getReposByLang } from '../../api/repos';
+import { langs } from '../../data/langs';
 import { DiagramPaper } from './DiagramPaper';
 
-interface PaperProps {
-    value: string,
-    width: number | string,
-}
-
-export const TopLanguages = ({ value: username, width }: PaperProps) => {
-    const { user } = useSelector(selectSearchUser);
-    const [values, setValues] = useState([]);
-
-    const { data, isLoading } = useQuery(
-        [queriesKeys['getLatestRepos'], username],
-        () => get100LatestRepos({ username }), {
-            enabled: !!username,
-            cacheTime: 10000,
-        }
-    );
+export const TopLanguages = () => {
+    const [stats, setStats] = useState({});
 
     useEffect(() => {
-        if (data && !isLoading) {
-            const counters: any = {};
-            data.forEach(({ language }: any) => {
-                if (!language) return;
-                if (counters[language]) {
-                    counters[language] += 1;
-                }
-                else {
-                    counters[language] = 1;
-                }
-            });
-            setValues(counters);
-        }
-    }, [data, isLoading])
+        let data: any = {};
+        langs.forEach(async (lang: string) => {
+            // try {
+            //     const resp = await getReposByLang({
+            //         lang,
+            //         page: 1,
+            //         per_page: 1,
+            //     });
+            //     console.log(resp.total_count);
+            //     data[lang] = resp?.total_count;
+            // }
+            // catch (err) {
+            //     console.log(err);
+            // }
+            data[lang] = Math.round(Math.random()*100000)
+        })
+        
+        setStats(data);
+    }, [])
 
-
-    return (
-        <DiagramPaper
-            title="Top Languages"
-            keys={Object.keys(values||{})}
-            values={Object.values(values||{})}
-            id="top-langs"
-            type="pie"
-            isLoading={isLoading}
-            showAllKeys={true}
-            chartWidth={width}
-        />
-    )
+    if (Object.keys(stats).length) {
+        return (
+            <DiagramPaper
+                title="Top Languages"
+                keys={Object.keys(stats||{})}
+                values={Object.values(stats||{})}
+                id="top-langs-global"
+                type="pie"
+                isLoading={false}
+                showAllKeys={true}
+                chartWidth={400}
+            />
+        )
+    }
+    return null;
 }

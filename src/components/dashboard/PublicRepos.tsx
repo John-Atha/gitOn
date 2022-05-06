@@ -3,7 +3,7 @@ import { FolderOutlined } from '@mui/icons-material';
 import { useTheme } from '@mui/system';
 import { useSelector } from 'react-redux'
 import { selectSearchUser } from '../../redux/slices/searchUser'
-import { SimpleCard } from './SimpleCard';
+import { SimpleCard } from '../general/SimpleCard';
 
 
 export const PublicRepos = () => {

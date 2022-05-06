@@ -2,7 +2,7 @@ import React from 'react'
 import { GroupOutlined } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 import { selectSearchUser } from '../../redux/slices/searchUser'
-import { SimpleCard } from './SimpleCard'
+import { SimpleCard } from '../general/SimpleCard'
 import { useTheme } from '@mui/system'
 
 

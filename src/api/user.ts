@@ -57,3 +57,17 @@ export const getFamousUsers = async ({ limit=10 }: FamousProps) => {
     };
     return getRequest({ requestUrl, headers, params });
 }
+
+export interface GetAllUsersProps {
+    type?: string,
+}
+export const getAllUsers = async ({ type=`User` }: GetAllUsersProps) => {
+    const requestUrl = `https://api.github.com/search/users`
+    const params = {
+        q: `type:${type}`,
+        per_page: 1,
+        page: 1,
+    };
+    const headers = buildAuthHeader();
+    return getRequest({ requestUrl, headers, params });
+}

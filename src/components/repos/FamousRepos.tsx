@@ -16,7 +16,7 @@ export const FamousRepos = () => {
         <CarouselResults
             data={data?.items}
             isLoading={isLoading}
-            width={550}
+            width={"70vw"}
             title="Most starred repos"
             oneResultComponent={
                 <OneRepo
