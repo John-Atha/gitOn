@@ -22,7 +22,6 @@ const queryClient = new QueryClient(({
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
     primary: {
       main:  "#13a155",
       light: "#f0fcf3",

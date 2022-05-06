@@ -18,6 +18,7 @@ export interface OneRepoProps {
     topics?: string[],
     watchers?: number,
     owner?: any,
+    stargazers_count?: number,
 }
 
 export const OneRepo = ({
@@ -66,28 +67,36 @@ export const OneRepo = ({
             elevation={3}
             sx={{ width: 400, minHeight: 250 }}
         >
-            <CardContent>
-                <Grid container justifyContent="space-between">
-                    <Grid item>
-                        <Typography variant="h6">
-                            {name}
+            <Grid container minHeight={250} alignItems="space-between">
+                <Grid item xs={12}>
+                    <CardContent>
+                        <Grid container justifyContent="space-between">
+                            <Grid item>
+                                <Typography variant="h6">
+                                    {name}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                { renderSparkLine() }
+                            </Grid>
+                        </Grid>
+                        <OwnerAvatar username={login} avatar_url={avatar_url} href={owner_html_url} />
+                        <Typography variant="body2" marginBottom={1}>
+                            {stringSlice(description, 50)}
                         </Typography>
-                    </Grid>
-                    <Grid item>
-                        { renderSparkLine() }
-                    </Grid>
+                        <Tags tags={topics} />
+                    </CardContent>
                 </Grid>
-                <OwnerAvatar username={login} avatar_url={avatar_url} href={owner_html_url} />
-                <Typography variant="body2" marginBottom={1}>
-                    {stringSlice(description, 50)}
-                </Typography>
-                <Tags tags={topics} />
-            </CardContent>
-            <CardActions>
-                <Button size="small" onClick={()=>navigate(html_url)}>
-                    See more
-                </Button>
-            </CardActions>
+                <Grid item xs={12}>
+                    <CardActions sx={{ height: 1 }}>
+                        <Grid container height={1} alignItems="flex-end">
+                            <Button size="small" onClick={()=>navigate(html_url)}>
+                                See more
+                            </Button>
+                        </Grid>
+                    </CardActions>
+                </Grid>
+            </Grid>
         </Card>
     )
 }

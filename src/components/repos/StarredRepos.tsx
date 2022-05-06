@@ -32,7 +32,7 @@ export const StarredRepos = () => {
     }
     else {
         content = (
-            <Grid container rowSpacing={1}>
+            <Grid container rowSpacing={1} paddingRight={3}>
                 {data.map((repo: any) => (
                     <Grid item xs={12}>
                         <OneRepoRow {...repo} />

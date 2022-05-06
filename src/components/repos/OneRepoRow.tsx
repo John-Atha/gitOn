@@ -1,4 +1,5 @@
-import { Avatar, CardHeader } from '@mui/material';
+import { StarOutlined } from '@mui/icons-material';
+import { Avatar, CardHeader, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/system';
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -16,7 +17,8 @@ export const OneRepoRow = ({
         login="",
         avatar_url="",
         html_url: owner_html_url="",
-    }
+    },
+    stargazers_count=0,
 }: OneRepoProps) => {
     const navigate = useNavigate();
     const theme = useTheme();
@@ -38,6 +40,15 @@ export const OneRepoRow = ({
             }}
             title={name}
             subheader={stringSlice(description, 20)}
+            
+            action={
+                <Grid container alignItems="center" justifyContent={"flex-end"} sx={{ color: theme.palette.primary.main }}>
+                    <StarOutlined fontSize='small' />
+                    <Typography variant="body2">
+                        { stargazers_count || 0 }
+                    </Typography>
+                </Grid>
+            }
         />
     )
 

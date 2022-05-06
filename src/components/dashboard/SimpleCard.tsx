@@ -59,13 +59,13 @@ export const SimpleCard = ({ subtitle, title, href, icon, severity }: SimpleCard
                         </Grid>
                         <Grid item xs={12}>
                             <Typography
-                                variant="h6"
+                                variant="body1"
                                 align="center"
                             >
                                 {title}
                             </Typography>
                             <Typography
-                                variant="body2"
+                                variant="caption"
                                 align="center"
                                 sx={{ wordBreak: "break-all" }}
                             >

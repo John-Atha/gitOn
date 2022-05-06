@@ -15,7 +15,7 @@ export const OwnerAvatar = ({ username, avatar_url, href, height=25, width=25, s
     return (
         <CardHeader
             component={NavLink}
-            to={`/repos?key=${username}`}
+            to={`/?key=${username}`}
             sx={{ padding: 1, paddingLeft: 0, textDecoration: "none" }}
             avatar={
                 <Avatar
