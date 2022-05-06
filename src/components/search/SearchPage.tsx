@@ -16,19 +16,24 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
   const renderResults = () => {
     if (searchParams.get("key")) {
       return (
-        <>
-          <Grid item xs={12}>
-            <UserCardWithoutData username={searchParams.get("key")} />
+          <Grid container rowSpacing={1} justifyContent={"center"}>
+            <Grid item xs={10}>
+              <UserCardWithoutData username={searchParams.get("key")} />
+            </Grid>
+            <Grid item xs={12}>
+              {resultsComponent}
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            {resultsComponent}
-          </Grid>
-        </>
       )
     }
     return (
       <Grid item width={600} maxWidth={"80vw"} marginTop={5}>
-        <Paper sx={{ alignItems: "center", paddingTop: 10, paddingBottom: 10 }}>
+        <Paper sx={{
+            alignItems: "center",
+            paddingTop: 10,
+            paddingBottom: 10
+          }}
+        >
           <Typography variant="h6" align="center">
             Search for a user to see his/her info
           </Typography>
@@ -37,14 +42,19 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
     )
   }
   return (
-    <Grid container rowSpacing={3} justifyContent="center">
+    <Grid container rowSpacing={2} justifyContent="center">
       <Grid item xs={12}>
+        <Typography variant="h6">
+          Search
+        </Typography>
         <SearchBar
           initValue=""
           placeholder={placeholder}
         />
       </Grid>
-      { renderResults() }
+      <Grid item xs={12}>
+        { renderResults() }
+      </Grid>
     </Grid>
   )
 }

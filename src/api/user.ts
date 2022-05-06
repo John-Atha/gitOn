@@ -40,3 +40,20 @@ export const getStarredRepos = async ({ username }: getUserProps) => {
     };
     return getRequest({ requestUrl, headers, params });
 }
+
+export interface FamousProps {
+    limit?: number,
+}
+
+export const getFamousUsers = async ({ limit=10 }: FamousProps) => {
+    const requestUrl = `https://api.github.com/search/users`;
+    const headers = buildAuthHeader();
+    const params = {
+        q: `followers:>1000`,
+        page: 1,
+        per_page: limit,
+        sort: `followers`,
+        order: `desc`,
+    };
+    return getRequest({ requestUrl, headers, params });
+}

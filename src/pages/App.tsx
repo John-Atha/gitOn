@@ -1,59 +1,25 @@
-import { Grid } from '@mui/material';
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { CommitsArea } from '../components/dashboard/CommitsArea';
-import { TopLanguages } from '../components/dashboard/TopLanguages';
-import { SearchPage } from '../components/search/SearchPage';
+import { Grid } from '@mui/material';
 import { PageSkeleton } from './PageSkeleton';
-import { PublicRepos } from "../components/dashboard/PublicRepos";
-import { Followers } from '../components/dashboard/Followers';
-import { Follows } from '../components/dashboard/Follows';
-import { Email } from '../components/dashboard/Email';
-import { StarredRepos } from '../components/repos/StarredRepos';
+import { FamousUsers } from '../components/users/FamousUsers';
+import { FamousRepos } from '../components/repos/FamousRepos';
 
 export const App = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const renderResultsComponents = () => {
-    return (
-      <Grid container spacing={1} justifyContent={"center"}>
+  return (
+    <PageSkeleton>
+      <Grid container rowSpacing={1} justifyContent="center">
         <Grid item xs={12}>
-          <Grid container spacing={1} justifyContent="center">
-            <PublicRepos />
-            <Followers />
-            <Follows />
-            <Email />
-          </Grid>
-        </Grid>
-        <Grid item maxWidth={600} minWidth={500}>
-          <CommitsArea
-            value={searchParams.get("key") || ""}
-          />
-        </Grid>
-        <Grid item width={400} height={250}>
-          <Grid container rowSpacing={1}>
-            <Grid item xs={12}>
-              <TopLanguages
-                value={searchParams.get("key") || ""}
-                width={350}
-              />
+          <Grid container justifyContent={"center"}>
+            <Grid item>
+              <FamousUsers />
             </Grid>
-            <Grid item xs={12}>
-              <StarredRepos />
+            <Grid item>
+              <FamousRepos />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    )
-  }
-  return (
-    <PageSkeleton
-      children={
-        <SearchPage
-          placeholder={"Search for a user..."}
-          resultsComponent={renderResultsComponents()}
-        />
-      }
-    />
+    </PageSkeleton>
   );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "./config";
 import { buildAuthHeader, getRequest } from "./helpers";
+import { FamousProps } from "./user";
 
 axios.defaults.baseURL = apiUrl;
 
@@ -35,5 +36,18 @@ export const get100LatestRepos = async ({ username }: getReposProps) => {
         order: "desc"
     };
     const headers = buildAuthHeader();
+    return getRequest({ requestUrl, headers, params });
+}
+
+export const getFamousRepos = async ({ limit=10 }: FamousProps) => {
+    const requestUrl = `https://api.github.com/search/repositories`;
+    const headers = buildAuthHeader();
+    const params = {
+        q: `stars:>1000`,
+        page: 1,
+        per_page: limit,
+        sort: 'stars',
+        order: 'desc',
+    };
     return getRequest({ requestUrl, headers, params });
 }

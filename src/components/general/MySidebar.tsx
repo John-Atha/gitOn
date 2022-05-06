@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
-import { GitHub, Home, Folder, PersonAddAlt, Explore, Dashboard } from '@mui/icons-material';
+import { GitHub, Home, Folder, PersonAddAlt, Explore, Dashboard, PersonOutlined, DashboardOutlined, FolderOutlined, PersonAddAltOutlined, ExploreOutlined } from '@mui/icons-material';
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, Typography, Divider, List, ListItem, ListItemIcon, ListItemText, Button, useTheme } from '@mui/material';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { LoginDialog } from '../login/LoginDialog';
@@ -65,22 +65,27 @@ export default function MySidebar({ children }: MySidebarProps) {
     {
       slug: "",
       text: "Dashboard",
-      icon: <Dashboard />,
+      icon: <DashboardOutlined />
+    },
+    {
+      slug: "users",
+      text: "Users",
+      icon: <PersonOutlined />
     },
     {
         slug: "repos",
         text: "Repositories",
-        icon: <Folder />,
+        icon: <FolderOutlined />
     },
     {
         slug: "contacts",
         text: "Contacts",
-        icon: <PersonAddAlt />,
+        icon: <PersonAddAltOutlined />,
     },
     {
         slug: "explore",
         text: "Explore",
-        icon: <Explore />,
+        icon: <ExploreOutlined />,
     }
   ]
 

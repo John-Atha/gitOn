@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card, CardActions, CardContent, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { alpha, Button, Card, CardActions, CardContent, Grid, Paper, Typography, useTheme } from "@mui/material";
 import { stringSlice } from '../../helpers/stringSlice';
 import { useNavigate } from 'react-router-dom';
 import { OwnerAvatar } from './OwnerAvatar';
@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { queriesKeys } from '../../api/queriesKeys';
 import { getRepoParticipation } from '../../api/repos';
 import { Sparklines, SparklinesLine  } from 'react-sparklines';
+import { arraySample } from '../../helpers/arraySample';
 
 export interface OneRepoProps {
     id?: number,
@@ -19,6 +20,10 @@ export interface OneRepoProps {
     watchers?: number,
     owner?: any,
     stargazers_count?: number,
+    keywordsLim?: number,
+    descriptionLim?: number,
+    height?: number,
+    width?: number,
 }
 
 export const OneRepo = ({
@@ -32,7 +37,11 @@ export const OneRepo = ({
         login="",
         avatar_url="",
         html_url: owner_html_url="",
-    }
+    },
+    keywordsLim=-1,
+    descriptionLim=100,
+    height,
+    width
 }: OneRepoProps) => {
     const navigate = useNavigate();
     const theme = useTheme();
@@ -65,7 +74,12 @@ export const OneRepo = ({
         <Card
             component={Paper}
             elevation={3}
-            sx={{ width: 400, minHeight: 250 }}
+            sx={{
+                width: width || 300,
+                ...(height && { height }),
+                ...(!height && { minHeight: 250 }),
+                backgroundColor: alpha(theme.palette.primary.main, 0.1)
+            }}
         >
             <Grid container minHeight={250} alignItems="space-between">
                 <Grid item xs={12}>
@@ -82,9 +96,11 @@ export const OneRepo = ({
                         </Grid>
                         <OwnerAvatar username={login} avatar_url={avatar_url} href={owner_html_url} />
                         <Typography variant="body2" marginBottom={1}>
-                            {stringSlice(description, 50)}
+                            {stringSlice(description, descriptionLim)}
                         </Typography>
-                        <Tags tags={topics} />
+                        <Tags tags={
+                            keywordsLim===-1 ? topics : arraySample({ array: topics, limit: keywordsLim })
+                        } />
                     </CardContent>
                 </Grid>
                 <Grid item xs={12}>

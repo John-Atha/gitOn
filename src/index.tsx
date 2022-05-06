@@ -11,6 +11,7 @@ import { Explore } from './pages/Explore';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { Users } from './pages/Users';
 
 const queryClient = new QueryClient(({
   defaultOptions: {
@@ -39,10 +40,11 @@ root.render(
         <Provider store={store}>
           <BrowserRouter>
             <Routes>
-              <Route path="/"   element={<App />} />
+              <Route path="/"           element={<App />} />
+              <Route path="/users"      element={<Users /> }       />
               <Route path="/contacts"   element={<ContactsPage />} />
-              <Route path="/explore"   element={<Explore />} />
-              <Route path="/repos"   element={<Repositories />} />
+              <Route path="/explore"    element={<Explore />} />
+              <Route path="/repos"      element={<Repositories />} />
             </Routes>
           </BrowserRouter>
         </Provider>
