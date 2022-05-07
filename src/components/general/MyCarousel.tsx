@@ -44,7 +44,7 @@ function MyCarousel({ items }: CarouselProps) {
             >
                 {items.map((item: any, index: number) => {
                     return (
-                        <div key={index} draggable={false} style={{ marginRight: "4px" }}>
+                        <div key={index} draggable={false} style={{ padding: "4px", paddingLeft: 0, }}>
                             {item}
                         </div>
                     )

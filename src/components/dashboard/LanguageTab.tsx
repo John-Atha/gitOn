@@ -10,6 +10,9 @@ interface LanguageTabProps {
 
 export const LanguageTab = ({ lang }: LanguageTabProps) => {
     const [page, setPage] = useState(1);
+    const [perPage, setPerPage] = useState(10);
+    const [total, setTotal] = useState(0);
+
     const columns = [
         {
             field: 'name',
@@ -77,7 +80,7 @@ export const LanguageTab = ({ lang }: LanguageTabProps) => {
         },
     ]
     const [rows, setRows] = useState([]);
-    const { data, isLoading } = useGetLanguageRepos({ lang, page });
+    const { data, isLoading } = useGetLanguageRepos({ lang, page, per_page: perPage });
 
     const getRowFromDatum = ({
         name,
@@ -103,18 +106,26 @@ export const LanguageTab = ({ lang }: LanguageTabProps) => {
             setRows(data?.items?.map((datum: any) => (
                 getRowFromDatum(datum)
             )));
+            if(!total) setTotal(data.total_count);
         }
     }, [data, isLoading])
     
     return (
         <DataGrid
+            density='compact'
             rows={rows || []}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[5, 10, 15]}
             loading={isLoading}
             autoHeight
-            
+
+            pageSize={perPage}
+            rowsPerPageOptions={[5, 10, 15]}
+            rowCount={Math.floor(total/perPage)+1}
+            pagination
+            paginationMode='server'
+
+            onPageChange={(page: number) => setPage(page)}
+            onPageSizeChange={(size: number) => setPerPage(size)}
         />
     )
 

@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Paper, Typography } from '@mui/material';
 import React, { cloneElement, ReactElement } from 'react'
 import MyCarousel from './MyCarousel';
 import Spinner from './Spinner';
@@ -44,7 +44,7 @@ export const CarouselResults = ({
     return (
         <Card sx={{
             width: width || 1,
-            ...(maxWidth && { maxWidth })
+            ...(maxWidth && { maxWidth }),
             }}
             elevation={elevation}
         >
@@ -52,7 +52,9 @@ export const CarouselResults = ({
                 <Typography variant="h6" align="center" sx={{ paddingBottom: 1 }}>
                     {title}
                 </Typography>
-                { content }
+                <Paper elevation={0} sx={{ padding: 1 }}>
+                    { content }
+                </Paper>
             </CardContent>
         </Card>
     )
