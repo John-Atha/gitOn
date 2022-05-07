@@ -69,3 +69,19 @@ export const getReposByLang = async ({ lang, page, per_page=10 }: GetLanguageRep
     };
     return getRequest({ requestUrl, headers, params });
 }
+
+export interface GetRepoProps {
+    username: string | null,
+    repoName: string | null,
+}
+export const getOneRepo = async ({ username, repoName }: GetRepoProps) => {
+    const requestUrl = `https://api.github.com/repos/${username}/${repoName}`;
+    const headers = buildAuthHeader();
+    return getRequest({ requestUrl, headers });
+}
+
+export const GetRepoDailyCommits = async ({ username, repoName }: GetRepoProps) => {
+    const requestUrl = `https://api.github.com/repos/${username}/${repoName}/stats/commit_activity`;
+    const headers = buildAuthHeader();
+    return getRequest({ requestUrl, headers });
+}

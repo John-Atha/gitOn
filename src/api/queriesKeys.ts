@@ -14,4 +14,6 @@ export const queriesKeys = {
     'getFamousRepos': `repos/get/famous`,
     'getAllUsers': `users/get/all`,
     'getLanguageRepos': `language/repos/get/all`,
+    'getOneRepo': `repos/one/get`,
+    'getRepoDailyCommits': `repos/one/commits/daily/get`,
 }

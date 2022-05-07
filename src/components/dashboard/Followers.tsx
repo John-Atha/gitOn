@@ -16,7 +16,9 @@ export const Followers = () => {
             subtitle={"Followers"}
             title={`${followers}` || '0'}
             icon={
-                <GroupOutlined htmlColor={theme.palette.info.main} />
+                <GroupOutlined
+                    htmlColor={theme.palette.info.main}
+                />
             }
             severity="info"
             href="contacts"

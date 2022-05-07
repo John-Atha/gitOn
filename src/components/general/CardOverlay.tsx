@@ -6,7 +6,7 @@ interface CardOverlayProps {
     src: string,
     title: string,
     subtitle?: string,
-    height?: number,
+    height?: number|string,
     width?: number,
     alt?: string,
     href: string,
@@ -27,7 +27,8 @@ export const CardOverlay = ({
             sx={{
                 height,
                 width,
-                borderRadius: 7
+                borderRadius: 7,
+                position: 'relative',
             }}
             component={NavLink}
             to={href}
@@ -47,12 +48,12 @@ export const CardOverlay = ({
                 // width,
                 position: "absolute",
                 bottom: 0,
-                width: 'calc(100% - 4px)',
+                width: 1,
                 borderRadius: 5,
                 height: 100,
                 padding: 1,
                 paddingBottom: "8px !important",
-                background: "linear-gradient(to top, rgba(0, 0, 0, 1), transparent)",
+                background: "linear-gradient(to top, rgba(0, 0, 0, 1), transparent 50%)",
                 color: theme.palette.primary.main,
             }}>
                 <Grid container height={1} alignItems={"flex-end"}>

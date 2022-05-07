@@ -7,6 +7,7 @@ import { stringSlice } from '../../helpers/stringSlice';
 import { OneRepoProps } from "./OneRepo";
 
 export const OneRepoRow = ({
+    id=0,
     name="",
     fullName="",
     description="",
@@ -26,7 +27,7 @@ export const OneRepoRow = ({
     return (
         <CardHeader
             component={NavLink}
-            to={`/repos?key=${login}`}
+            to={`/repos?key=${login}&repo=${name}`}
             sx={{ padding: 1, paddingLeft: 0, textDecoration: "none" }}
             avatar={
                 <Avatar

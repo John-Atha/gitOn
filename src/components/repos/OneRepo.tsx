@@ -1,7 +1,7 @@
 import React from 'react'
 import { alpha, Button, Card, CardActions, CardContent, Grid, Paper, Rating, Typography, useTheme } from "@mui/material";
 import { stringSlice } from '../../helpers/stringSlice';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { OwnerAvatar } from './OwnerAvatar';
 import { Tags } from './Tags';
 import { useQuery } from 'react-query';
@@ -25,9 +25,12 @@ export interface OneRepoProps {
     descriptionLim?: number,
     height?: number,
     width?: number,
+    default_branch?: string,
+    language?: string,
 }
 
 export const OneRepo = ({
+    id=0,
     name="",
     fullName="",
     description="",
@@ -93,7 +96,7 @@ export const OneRepo = ({
                 width: width || 300,
                 ...(height && { height }),
                 ...(!height && { minHeight: 250 }),
-                backgroundColor: alpha(theme.palette.primary.main, 0.1)
+                backgroundColor: alpha(theme.palette.primary.main, 0.03)
             }}
         >
             <Grid container minHeight={250} alignItems="space-between">
@@ -101,7 +104,15 @@ export const OneRepo = ({
                     <CardContent>
                         <Grid container justifyContent="space-between">
                             <Grid item>
-                                <Typography variant="h6">
+                                <Typography
+                                    variant="h6"
+                                    component={NavLink}
+                                    to={`/repos?key=${login}&repo=${name}`}
+                                    sx={{
+                                        textDecoration: "none",
+                                        color: "black",
+                                    }}
+                                >
                                     {name}
                                 </Typography>
                             </Grid>

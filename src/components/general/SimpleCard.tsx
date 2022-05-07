@@ -5,7 +5,7 @@ import { JsxElement } from 'typescript';
 
 interface SimpleCardProps {
     subtitle: string,
-    title: string,
+    title?: string|number,
     href: string,
     icon: any,
     severity: "success" | "info" | "error" | "warning" | "primary",

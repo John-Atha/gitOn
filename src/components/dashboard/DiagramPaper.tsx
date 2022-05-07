@@ -26,6 +26,10 @@ export const DiagramPaper = ({
 }: DiagramPaperProps) => {
     let content = <Spinner />
 
+    if (!isLoading && !keys?.length) {
+        return null;
+    }
+    
     if (!isLoading) {
         content = (
             <GeneralChart

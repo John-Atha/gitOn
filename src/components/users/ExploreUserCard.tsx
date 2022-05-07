@@ -16,6 +16,7 @@ export interface OneUser {
     followers?: number,
     following?: number,
     width?: number,
+    height?: number|string,
 }
 
 export const ExploreUserCard = ({
@@ -24,6 +25,7 @@ export const ExploreUserCard = ({
     html_url="",
     avatar_url="",
     width,
+    height,
 }: OneUser) => {
     return (
         <CardOverlay
@@ -31,7 +33,7 @@ export const ExploreUserCard = ({
             title={login}
             subtitle={stringSlice(bio, 30)}
             href={`/users?key=${login}`}
-            height={175}
+            height={height || 175}
             width={width || 400}
         />
     )
