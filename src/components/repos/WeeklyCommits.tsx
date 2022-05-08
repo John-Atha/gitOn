@@ -9,6 +9,7 @@ export const WeeklyCommits = ({ username, repoName }: GetRepoProps) => {
         [queriesKeys['getRepoParticipation'], username, repoName],
         () => getRepoParticipation({ username: username||"", repoName: repoName||"" }), {
             enabled: !!username && !!repoName,
+            refetchOnWindowFocus: false,
         },
     );
 

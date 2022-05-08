@@ -9,6 +9,7 @@ export const FamousRepos = () => {
         queriesKeys['getFamousRepos'],
         () => getFamousRepos({ limit: 10 }), {
             cacheTime: 100000,
+            refetchOnWindowFocus: false,
         }
     )
 

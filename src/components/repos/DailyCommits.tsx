@@ -12,6 +12,7 @@ export const DailyCommits = ({ username, repoName }: GetRepoProps) => {
         [queriesKeys['getRepoDailyCommits'], username, repoName],
         () => GetRepoDailyCommits({ username, repoName }), {
             enabled: !!username && !!repoName,
+            refetchOnWindowFocus: false,
         },
     );
 

@@ -20,6 +20,7 @@ export const Repos = ({ value: username }: UsernameProps) => {
         () => getRepos({ username, page }), {
             enabled: Boolean(username),
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     )
 

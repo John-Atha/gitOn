@@ -21,6 +21,7 @@ export const TopUserLanguages = ({ value: username, width }: PaperProps) => {
         () => get100LatestRepos({ username }), {
             enabled: !!username,
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     );
 

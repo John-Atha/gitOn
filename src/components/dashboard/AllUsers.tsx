@@ -24,6 +24,7 @@ export const AllUsers = ({
         [queriesKeys['getAllUsers'], type],
         () => getAllUsers({ type }), {
             cacheTime: 1000000,
+            refetchOnWindowFocus: false,
         },
     );
 

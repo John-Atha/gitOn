@@ -18,6 +18,7 @@ export const StarredRepos = () => {
         [queriesKeys['getStarredRepos'], user?.login],
         () => getStarredRepos({ username: user?.login }), {
             enabled: !!user?.login,
+            refetchOnWindowFocus: false,
         },
     );
 

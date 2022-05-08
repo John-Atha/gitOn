@@ -56,6 +56,7 @@ export const OneRepo = ({
         () => getRepoParticipation({ username: login, repoName: name }), {
             enabled: Boolean(login) && Boolean(name),
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     )
 
@@ -140,7 +141,7 @@ export const OneRepo = ({
                 <Grid item xs={12}>
                     <CardActions sx={{ height: 1 }}>
                         <Grid container height={1} alignItems="flex-end">
-                            <Button size="small" onClick={()=>navigate(html_url)}>
+                            <Button size="small" onClick={()=>window.location.href=html_url}>
                                 See more
                             </Button>
                         </Grid>

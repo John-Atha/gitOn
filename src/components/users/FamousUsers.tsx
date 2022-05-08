@@ -10,6 +10,7 @@ export const FamousUsers = () => {
         queriesKeys['getFamousUsers'],
         () => getFamousUsers({ limit: 10 }), {
             cacheTime: 100000,
+            refetchOnWindowFocus: false,
         }
     )
 

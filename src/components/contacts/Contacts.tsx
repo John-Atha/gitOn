@@ -29,6 +29,7 @@ export const Contacts = ({ value: username }: UsernameProps) => {
         () => getFollowers({ username: username || "" }), {
             enabled: Boolean(username),
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     )
 
@@ -37,6 +38,7 @@ export const Contacts = ({ value: username }: UsernameProps) => {
         () => getFollows({ username: username || "" }), {
             enabled: Boolean(username),
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     )
 

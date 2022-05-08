@@ -33,6 +33,7 @@ export const UserCardWithoutData = ({ username }: OneUserProps) => {
         () => getUser({ username: username || "" }), {
             enabled: Boolean(username),
             cacheTime: 10000,
+            refetchOnWindowFocus: false,
         }
     )
 

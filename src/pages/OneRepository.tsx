@@ -22,6 +22,7 @@ export const OneRepository = () => {
         [queriesKeys['getOneRepo'], repoName, username],
         () => getOneRepo({ username, repoName }), {
             enabled: !!username && !!repoName,
+            refetchOnWindowFocus: false,
         }
     );
 
