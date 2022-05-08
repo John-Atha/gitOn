@@ -18,7 +18,10 @@ export const SearchPage = ({ placeholder, resultsComponent }: SearchPageProps) =
       return (
           <Grid container rowSpacing={1} justifyContent={"center"}>
             <Grid item xs={10}>
-              <UserCardWithoutData username={searchParams.get("key")} />
+              <UserCardWithoutData
+                username={searchParams.get("key")}
+                showLink  
+              />
             </Grid>
             <Grid item xs={12}>
               {resultsComponent}

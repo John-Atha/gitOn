@@ -11,6 +11,7 @@ export const RepoCards = ({
     default_branch,
     language,
     owner,
+    html_url,
 }: OneRepoProps) => {
     const theme = useTheme();
     return (
@@ -62,7 +63,7 @@ export const RepoCards = ({
             </Grid>
             <Grid item>
                 <SimpleCard
-                    subtitle='Main Language'
+                    subtitle='See source code'
                     title={language}
                     icon={
                         <CodeOutlined
@@ -70,7 +71,7 @@ export const RepoCards = ({
                         />
                     }
                     severity='error'
-                    href="#"
+                    href={html_url || "#"}
                 />
             </Grid>
         </Grid>

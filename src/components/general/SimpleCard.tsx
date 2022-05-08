@@ -17,6 +17,11 @@ export const SimpleCard = ({ subtitle, title, href, icon, severity }: SimpleCard
     const [searchParams, setSearchParams] = useSearchParams();
 
     const goToHref = () => {
+        if (href==="#") return;
+        if (href.startsWith("https://")) {
+            window.location.href=href;
+            return;
+        }
         const key = searchParams.get("key");
         if (key) {
             navigate(`/${href}?key=${key}`);

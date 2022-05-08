@@ -24,9 +24,13 @@ export interface OneUser {
 
 interface OneUserProps {
     username: string|null,
+    showLink?: boolean,
 }
 
-export const UserCardWithoutData = ({ username }: OneUserProps) => {
+export const UserCardWithoutData = ({
+    username,
+    showLink=false,
+}: OneUserProps) => {
     const dispatch = useAppDispatch();
     const { data, isLoading } = useQuery(
         [queriesKeys['getUser'], username],
@@ -60,6 +64,9 @@ export const UserCardWithoutData = ({ username }: OneUserProps) => {
     }
 
     return (
-        <UserCard {...data} />
+        <UserCard
+            {...data}
+            showLink
+        />
     )
 }

@@ -13,6 +13,7 @@ export interface OneUser {
     public_repos?: number,
     followers?: number,
     following?: number,
+    showLink?: boolean,
 }
 
 export const UserCard = ({
@@ -20,6 +21,7 @@ export const UserCard = ({
     bio="",
     html_url="",
     avatar_url="",
+    showLink=false,
 }: OneUser) => {
     return (
         <Card component={Paper} elevation={3} sx={{ padding: 1 }}>
@@ -30,6 +32,7 @@ export const UserCard = ({
                 height={40}
                 width={40}
                 subheader={bio}
+                showLink={showLink}
             />
         </Card>
     )

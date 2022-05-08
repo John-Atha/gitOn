@@ -41,7 +41,9 @@ export const OneRepository = () => {
         <PageSkeleton>
             <Grid container rowSpacing={1} justifyContent={"center"}>
                 <Grid item xs={12}>
-                    <OneRepoBasicCard {...data} />
+                    <OneRepoBasicCard
+                        {...data}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <Tags

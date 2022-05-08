@@ -9,9 +9,28 @@ interface OwnerAvatarProps {
     height?: number,
     width?: number,
     subheader?: string,
+    showLink?: boolean,
 }
-export const OwnerAvatar = ({ username, avatar_url, href="#", height=25, width=25, subheader }: OwnerAvatarProps) => {
+export const OwnerAvatar = ({
+    username,
+    avatar_url,
+    href="#",
+    height=25,
+    width=25,
+    subheader,
+    showLink=false,
+}: OwnerAvatarProps) => {
     const theme = useTheme();
+    const renderAction = () => {
+        if (showLink) {
+            return (
+                <a href={href} onClick={(e) => e.stopPropagation()}>
+                    Github profile
+                </a>
+            )
+        }
+        return null;
+    }
     return (
         <CardHeader
             component={NavLink}
@@ -29,6 +48,7 @@ export const OwnerAvatar = ({ username, avatar_url, href="#", height=25, width=2
             }}
             title={username}
             subheader={subheader}
+            action={renderAction()}
         />
     )
 }
